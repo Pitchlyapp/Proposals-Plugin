@@ -1,0 +1,21 @@
+<template name="home">
+  
+  <div class="__home">
+    <div class="floating-box">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" version="1.1" aria-labelledby="unsplash" aria-hidden="false"><title>Unsplash</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg>
+      </div>
+      <h1>This is the home screen</h1>
+      <p>This is where you would put the full-screen experience of your app outside of Pitchly. This experience would communicate with Pitchly over Pitchly's API, but it would <span class="italic">not</span> use postMessages.</p>
+    </div>
+    <div class="floating-box details">
+      <p class="bold">The terminology in Pitchly is as follows:</p>
+      <ul>
+        <li><span class="bold">Plugins</span> are apps with a side-pane interface within Pitchly, but they may also have a full-screen interface.</li>
+        <li><span class="bold">Apps</span> are the entire third-party application that communicates with Pitchly. An app may or may not also have a plugin.</li>
+        <li>An app can either be exlusively a plugin, exclusively a full-screen app, or both. Some apps may also be <span class="bold">headless</span>, without an interface, but these won't be available for a user to open inside Pitchly.</li>
+      </ul>
+    </div>
+  </div>
+  
+</template>

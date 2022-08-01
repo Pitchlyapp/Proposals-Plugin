@@ -1,0 +1,89 @@
+<template name="plugin">
+  
+  <div class="__plugin {{#if and (not isLoadingInitial) (not error) (not images.length) (not search)}}initial-splash-layout{{/if}}">
+    
+    <div class="random-splash-bg" style="{{#if randomImage}}--bg-url: url('{{randomImage.urls.regular}}');{{/if}}">
+      {{#if randomImage}}
+        <div class="attribution">
+          <div class="text">
+            Photo by <a href="{{randomImage.user.links.html}}?utm_source=pitchly&utm_medium=referral" target="_blank">{{randomImage.user.name}}</a> on <a href="https://unsplash.com/?utm_source=pitchly&utm_medium=referral" target="_blank">Unsplash</a>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+    
+    <div class="header-container">
+      
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" version="1.1" aria-labelledby="unsplash" aria-hidden="false"><title>Unsplash</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg>
+      </div>
+      
+      <h1>Unsplash</h1>
+      
+      <form class="search-bar">
+        {{> searchInput
+          inputAttrs=(object class="medium search-input" placeholder="Search images...")
+        }}
+        <button type="submit" class="search-button">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px" height="12px" viewBox="0 0 12 12"><g transform="translate(0, 0)"><path d="M11.707,10.293l-2.54-2.54A5.015,5.015,0,1,0,7.753,9.167l2.54,2.54a1,1,0,0,0,1.414-1.414ZM2,5A3,3,0,1,1,5,8,3,3,0,0,1,2,5Z" fill="currentColor"></path></g></svg>
+        </button>
+      </form>
+      
+    </div>
+    
+    {{#if isLoadingInitial}}
+      <div class="loading-container">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g transform="translate(0, 0)"><g class="nc-loop_circle-02-16" transform="rotate(193.2528571358749 8 8)"> <path opacity="0.4" fill="currentColor" d="M8,16c-4.4111328,0-8-3.5888672-8-8s3.5888672-8,8-8s8,3.5888672,8,8S12.4111328,16,8,16z M8,2C4.6914062,2,2,4.6914062,2,8s2.6914062,6,6,6s6-2.6914062,6-6S11.3085938,2,8,2z"></path> <path data-color="color-2" fill="currentColor" d="M16,8h-2c0-3.3085938-2.6914062-6-6-6V0C12.4111328,0,16,3.5888672,16,8z"></path> </g> <script>!function(){function t(t){this.element=t,this.animationId,this.start=null,this.init()}if(!window.requestAnimationFrame){var i=null;window.requestAnimationFrame=function(t,n){var e=(new Date).getTime();i||(i=e);var a=Math.max(0,16-(e-i)),o=window.setTimeout(function(){t(e+a)},a);return i=e+a,o}}t.prototype.init=function(){var t=this;this.animationId=window.requestAnimationFrame(t.triggerAnimation.bind(t))},t.prototype.reset=function(){var t=this;window.cancelAnimationFrame(t.animationId)},t.prototype.triggerAnimation=function(t){var i=this;this.start||(this.start=t);var n=t-this.start;504>n||(this.start=this.start+504),this.element.setAttribute("transform","rotate("+Math.min(n/1.4,360)+" 8 8)");if(document.documentElement.contains(this.element))window.requestAnimationFrame(i.triggerAnimation.bind(i))};var n=document.getElementsByClassName("nc-loop_circle-02-16"),e=[];if(n)for(var a=0;n.length>a;a++)!function(i){e.push(new t(n[i]))}(a);document.addEventListener("visibilitychange",function(){"hidden"==document.visibilityState?e.forEach(function(t){t.reset()}):e.forEach(function(t){t.init()})})}();</script></g></svg>
+      </div>
+    {{else}}
+      {{#unless error}}
+        {{#if images.length}}
+          <div class="images-container">
+            {{#each image in images}}
+              <div class="image {{#if equals imageBeingInserted image.id}}inserting{{/if}}" data-id="{{image.id}}">
+                <img src="{{image.urls.small}}">
+                <div class="overlay">
+                  <div class="instructions">
+                    {{#if equals imageBeingInserted image.id}}
+                      <div class="loading-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g transform="translate(0, 0)"><g class="nc-loop_circle-02-16" transform="rotate(193.2528571358749 8 8)"> <path opacity="0.4" fill="currentColor" d="M8,16c-4.4111328,0-8-3.5888672-8-8s3.5888672-8,8-8s8,3.5888672,8,8S12.4111328,16,8,16z M8,2C4.6914062,2,2,4.6914062,2,8s2.6914062,6,6,6s6-2.6914062,6-6S11.3085938,2,8,2z"></path> <path data-color="color-2" fill="currentColor" d="M16,8h-2c0-3.3085938-2.6914062-6-6-6V0C12.4111328,0,16,3.5888672,16,8z"></path> </g> <script>!function(){function t(t){this.element=t,this.animationId,this.start=null,this.init()}if(!window.requestAnimationFrame){var i=null;window.requestAnimationFrame=function(t,n){var e=(new Date).getTime();i||(i=e);var a=Math.max(0,16-(e-i)),o=window.setTimeout(function(){t(e+a)},a);return i=e+a,o}}t.prototype.init=function(){var t=this;this.animationId=window.requestAnimationFrame(t.triggerAnimation.bind(t))},t.prototype.reset=function(){var t=this;window.cancelAnimationFrame(t.animationId)},t.prototype.triggerAnimation=function(t){var i=this;this.start||(this.start=t);var n=t-this.start;504>n||(this.start=this.start+504),this.element.setAttribute("transform","rotate("+Math.min(n/1.4,360)+" 8 8)");if(document.documentElement.contains(this.element))window.requestAnimationFrame(i.triggerAnimation.bind(i))};var n=document.getElementsByClassName("nc-loop_circle-02-16"),e=[];if(n)for(var a=0;n.length>a;a++)!function(i){e.push(new t(n[i]))}(a);document.addEventListener("visibilitychange",function(){"hidden"==document.visibilityState?e.forEach(function(t){t.reset()}):e.forEach(function(t){t.init()})})}();</script></g></svg>
+                      </div>
+                    {{else}}
+                      {{#if isAttachmentFieldSelected}}
+                        <div class="description">Click to insert image into selected cell</div>
+                      {{else}}
+                        <div class="description">Select an attachment field to insert image</div>
+                      {{/if}}
+                      <button type="button" class="insert-image-button medium" disabled={{not isAttachmentFieldSelected}}>Insert image</button>
+                    {{/if}}
+                  </div>
+                  <div class="attribution">
+                    Photo by <a href="{{image.user.links.html}}?utm_source=pitchly&utm_medium=referral" target="_blank">{{image.user.name}}</a> on <a href="https://unsplash.com/?utm_source=pitchly&utm_medium=referral" target="_blank">Unsplash</a>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+          {{#if isLoadingMore}}
+            <div class="loading-container">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"><g transform="translate(0, 0)"><g class="nc-loop_circle-02-16" transform="rotate(193.2528571358749 8 8)"> <path opacity="0.4" fill="currentColor" d="M8,16c-4.4111328,0-8-3.5888672-8-8s3.5888672-8,8-8s8,3.5888672,8,8S12.4111328,16,8,16z M8,2C4.6914062,2,2,4.6914062,2,8s2.6914062,6,6,6s6-2.6914062,6-6S11.3085938,2,8,2z"></path> <path data-color="color-2" fill="currentColor" d="M16,8h-2c0-3.3085938-2.6914062-6-6-6V0C12.4111328,0,16,3.5888672,16,8z"></path> </g> <script>!function(){function t(t){this.element=t,this.animationId,this.start=null,this.init()}if(!window.requestAnimationFrame){var i=null;window.requestAnimationFrame=function(t,n){var e=(new Date).getTime();i||(i=e);var a=Math.max(0,16-(e-i)),o=window.setTimeout(function(){t(e+a)},a);return i=e+a,o}}t.prototype.init=function(){var t=this;this.animationId=window.requestAnimationFrame(t.triggerAnimation.bind(t))},t.prototype.reset=function(){var t=this;window.cancelAnimationFrame(t.animationId)},t.prototype.triggerAnimation=function(t){var i=this;this.start||(this.start=t);var n=t-this.start;504>n||(this.start=this.start+504),this.element.setAttribute("transform","rotate("+Math.min(n/1.4,360)+" 8 8)");if(document.documentElement.contains(this.element))window.requestAnimationFrame(i.triggerAnimation.bind(i))};var n=document.getElementsByClassName("nc-loop_circle-02-16"),e=[];if(n)for(var a=0;n.length>a;a++)!function(i){e.push(new t(n[i]))}(a);document.addEventListener("visibilitychange",function(){"hidden"==document.visibilityState?e.forEach(function(t){t.reset()}):e.forEach(function(t){t.init()})})}();</script></g></svg>
+            </div>
+          {{/if}}
+          {{#if isMoreResults}}
+            <button type="button" class="load-more-button secondary" disabled={{isLoadingMore}}>Load more</button>
+          {{/if}}
+        {{else}}
+          <div class="empty-results-container">
+            {{#if search}}
+              No matches found
+            {{/if}}
+          </div>
+        {{/if}}
+      {{else}}
+        <div class="error-container">{{error}}</div>
+      {{/unless}}
+    {{/if}}
+    
+  </div>
+  
+</template>

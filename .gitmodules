@@ -1,0 +1,9 @@
+[submodule "packages/accounts-pitchly"]
+	path = packages/accounts-pitchly
+	url = https://github.com/Pitchlyapp/accounts-pitchly
+[submodule "packages/pitchly-oauth"]
+	path = packages/pitchly-oauth
+	url = https://github.com/Pitchlyapp/pitchly-oauth
+[submodule "packages/pitchly-common"]
+	path = packages/pitchly-common
+	url = https://github.com/Pitchlyapp/pitchly-common

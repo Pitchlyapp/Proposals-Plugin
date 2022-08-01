@@ -1,0 +1,24 @@
+{
+  "name": "unsplash-app",
+  "private": true,
+  "scripts": {
+    "start": "meteor --settings settings-dev.json",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.5.6",
+    "@babel/runtime": "^7.16.5",
+    "clone-deep": "^4.0.1",
+    "graphql": "^16.1.0",
+    "jquery": "^3.6.0",
+    "meteor-node-stubs": "^1.1.0",
+    "subscriptions-transport-ws": "^0.11.0",
+    "underscore": "^1.13.4"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.js",
+      "server": "server/main.js"
+    }
+  }
+}

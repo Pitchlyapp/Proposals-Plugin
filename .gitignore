@@ -1,0 +1,6 @@
+node_modules/
+settings-dev.json
+settings-staging.json
+settings-prod.json
+.idea
+.run

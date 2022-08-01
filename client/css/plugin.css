@@ -1,0 +1,218 @@
+/* This file is the stylesheet for the side-pane plugin page that gets displayed inside Pitchly */
+
+.__plugin {
+  position: relative;
+  height: 100%;
+  text-align: center;
+  overflow: auto;
+}
+
+.__plugin .random-splash-bg {
+  display: none;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: var(--pitchly-color-off-white-bg);
+  background-image: var(--bg-url);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.__plugin .random-splash-bg .attribution {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  font-size: 14px;
+  padding: 0px 20px 20px 20px;
+}
+
+/* the black drop shadow behind the attribution at the bottom of the initial splash page */
+
+.__plugin .random-splash-bg .attribution:before {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  box-shadow: 0px 0px 50px 50px rgba(0, 0, 0, 0.8);
+}
+
+.__plugin .random-splash-bg .attribution .text {
+  position: relative;
+  z-index: 1;
+  color: var(--pitchly-color-white);
+  animation: pitchly-slide-up .2s ease-out;
+}
+
+.__plugin .random-splash-bg .attribution .text a {
+  color: var(--pitchly-color-off-white-text);
+}
+
+.__plugin .header-container {
+  position: sticky;
+  top: -85px;
+  z-index: 10;
+  background-color: var(--pitchly-color-white);
+  border-bottom: 1px solid var(--pitchly-color-off-white-border);
+  margin-bottom: 20px;
+}
+
+.__plugin .header-container .logo {
+  margin-top: 30px;
+}
+
+.__plugin .header-container h1 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.__plugin .header-container .search-bar {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 30px;
+}
+
+.__plugin .header-container .search-bar .search-button {
+  margin-left: 10px;
+}
+
+.__plugin .images-container {
+  padding: 0px 30px;
+  margin-top: 30px;
+}
+
+.__plugin .images-container .image {
+  position: relative;
+  margin-bottom: 20px;
+  box-shadow: 0px 5px 10px 0px rgba(var(--pitchly-color-off-white-shadow-rgb), 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+  animation: pitchly-slide-up .2s ease-out;
+}
+
+@keyframes delay-overlay-pointer-events {
+  0% {
+    pointer-events: none;
+  }
+  75% {
+    pointer-events: none;
+  }
+  100% {
+    pointer-events: auto;
+  }
+}
+
+.__plugin .images-container .image .overlay {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(68, 68, 68, 0.7);
+  backdrop-filter: blur(5px) grayscale(1);
+  opacity: 0;
+  transition: all 200ms cubic-bezier(0.165, 0.840, 0.440, 1.000); /* easeOutQuart */
+  color: white;
+}
+
+.__plugin .images-container .image .overlay a {
+  color: var(--pitchly-color-off-white-text);
+}
+
+.__plugin .images-container .image .overlay .instructions {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  right: 0px;
+  transform: translateY(-70%);
+  font-size: 14px;
+  padding: 0px 20px;
+  z-index: 1;
+  font-weight: 400;
+}
+
+.__plugin .images-container .image .overlay .instructions .description {
+  margin-bottom: 10px;
+}
+
+.__plugin .images-container .image .overlay .instructions button {
+  background-color: white;
+  color: #444444;
+  border-color: white;
+}
+
+.__plugin .images-container .image .overlay .instructions button:hover:enabled,
+.__plugin .images-container .image .overlay .instructions button:focus-visible:enabled,
+.__plugin .images-container .image .overlay .instructions button.popup-open:enabled {
+  opacity: 0.8;
+}
+
+.__plugin .images-container .image .overlay .attribution {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  font-size: 14px;
+  padding: 0px 20px 20px 20px;
+}
+
+.__plugin .images-container .image img {
+  display: block;
+  width: 100%;
+}
+
+.__plugin .images-container .image:hover .overlay,
+.__plugin .images-container .image.inserting .overlay {
+  opacity: 1;
+  /* delay transition in by 500ms */
+  transition: all 200ms cubic-bezier(0.165, 0.840, 0.440, 1.000) 500ms;
+  /* since we added a delay for showing the overlay, also add a delay for when links and buttons become clickable within the overlay */
+  animation: delay-overlay-pointer-events 900ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  pointer-events: auto;
+}
+
+.__plugin .empty-results-container {
+  color: var(--pitchly-color-off-white-text);
+  font-size: 15px;
+  padding: 0px 30px;
+}
+
+.__plugin .load-more-button {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.__plugin .loading-container {
+  text-align: center;
+	color: var(--pitchly-color-off-white-text);
+	animation: pitchly-fade-in .5s ease-out;
+}
+
+.__plugin .error-container {
+  color: var(--pitchly-color-red);
+  font-size: 15px;
+  padding: 0px 30px;
+}
+
+.__plugin.initial-splash-layout .header-container {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  right: 0px;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid var(--pitchly-color-off-white-border);
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+  box-shadow: 0px 0px 20px 0px rgba(var(--pitchly-color-off-white-shadow-rgb), 0.2);
+  backdrop-filter: blur(10px) grayscale(1);
+}
+
+.__plugin.initial-splash-layout .random-splash-bg {
+  display: block;
+}
