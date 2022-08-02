@@ -31,45 +31,45 @@ FlowRouter.decodeQueryParamsOnce = true;
 // happen on every route).
 
 const protectedRoutes = [
-	"home",
-	"plugin"
+  "home",
+  "plugin"
 ];
 
 const originalBlazeLayoutRenderFunc = BlazeLayout.render;
 let onLoginStateChange = null;
 
 Tracker.autorun(() => {
-	Meteor.userId();
-	Tracker.nonreactive(() => {
-		if (onLoginStateChange) {
-			onLoginStateChange();
-		}
-	});
+  Meteor.userId();
+  Tracker.nonreactive(() => {
+    if (onLoginStateChange) {
+      onLoginStateChange();
+    }
+  });
 });
 
 BlazeLayout.render = function(...args) {
-	originalBlazeLayoutRenderFunc(...args);
-	const routeName = FlowRouter.getRouteName();
-	if (_.contains(protectedRoutes, routeName)) {
-		onLoginStateChange = () => {
-			// close any open lightboxes, since clearing the page template does not clear open lightboxes
-			$('.lightbox').each(function() {
-				const $children = $(this).children(":first");
-				if ($children.length) {
-					// gets lightbox template's data context, which contains lightbox instance
-					const data = Blaze.getData($children.get(0));
-					if (typeof data=="object" && data!==null && data.lightbox) {
-						data.lightbox.destroy(); // close lightbox
-					}
-				}
-			});
-			// re-render page template
-			BlazeLayout.reset(); // clear current template
-			BlazeLayout.render(...args); // re-render template
-		};
-	} else {
-		onLoginStateChange = null;
-	}
+  originalBlazeLayoutRenderFunc(...args);
+  const routeName = FlowRouter.getRouteName();
+  if (_.contains(protectedRoutes, routeName)) {
+    onLoginStateChange = () => {
+      // close any open lightboxes, since clearing the page template does not clear open lightboxes
+      $('.lightbox').each(function() {
+        const $children = $(this).children(":first");
+        if ($children.length) {
+          // gets lightbox template's data context, which contains lightbox instance
+          const data = Blaze.getData($children.get(0));
+          if (typeof data=="object" && data!==null && data.lightbox) {
+            data.lightbox.destroy(); // close lightbox
+          }
+        }
+      });
+      // re-render page template
+      BlazeLayout.reset(); // clear current template
+      BlazeLayout.render(...args); // re-render template
+    };
+  } else {
+    onLoginStateChange = null;
+  }
 };
 
 
@@ -94,13 +94,13 @@ Tracker.autorun(() => {
 FlowRouter.wait();
 
 Tracker.autorun(() => {
-	if (Meteor.user()) {
-		// Sometimes, FlowRouter throws an extraneous error when it has been initialized
-		// multiple times. This try-catch just keeps it from polluting the JS console.
-		try {
-			FlowRouter.initialize();
-		} catch (error) {}
-	}
+  if (Meteor.user()) {
+    // Sometimes, FlowRouter throws an extraneous error when it has been initialized
+    // multiple times. This try-catch just keeps it from polluting the JS console.
+    try {
+      FlowRouter.initialize();
+    } catch (error) {}
+  }
 });
 
 
