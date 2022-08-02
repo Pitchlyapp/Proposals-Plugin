@@ -56,35 +56,43 @@ The app should now be accessible at http://localhost:3000/
 
 ## A word on Git submodules
 
-This app has several nested Git projects within it in the `packages` directory. To get updates for a submodule, `cd` to the specific package's directory and run `git pull`. This will get the latest updates for the package.
+<details>
+  <summary>Show details</summary>
+  
+  This app has several nested Git projects within it in the `packages` directory. To get updates for a submodule, `cd` to the specific package's directory and run `git pull`. This will get the latest updates for the package.
+</details>
 
 ## If running the Pitchly platform locally
 
-If running the platform locally, add the `platformOrigin` and `origin` properties to your `settings-dev.json` file:
+<details>
+  <summary>Show details</summary>
+  
+  If running the platform locally, add the `platformOrigin` and `origin` properties to your `settings-dev.json` file:
 
-```js
-{
-  "public": {
-    // other properties here...
-    "platformOrigin": "http://localhost:3000"
-  },
-  "packages": {
-    "service-configuration": {
-      "pitchly": {
-        // other properties here...
-        "origin": "http://localhost:3000"
+  ```js
+  {
+    "public": {
+      // other properties here...
+      "platformOrigin": "http://localhost:3000"
+    },
+    "packages": {
+      "service-configuration": {
+        "pitchly": {
+          // other properties here...
+          "origin": "http://localhost:3000"
+        }
       }
     }
   }
-}
-```
+  ```
 
-You would also need to make sure the app is registered with your local version of the platform instead of the online version.
+  You would also need to make sure the app is registered with your local version of the platform instead of the online version.
 
-You may also need to use a different command to run the app if the platform is already running on port `3000`. To run the app on port `3002`, you can run this:
+  You may also need to use a different command to run the app if the platform is already running on port `3000`. To run the app on port `3002`, you can run this:
 
-```
-meteor --settings settings-dev.json --port 3002
-```
+  ```
+  meteor --settings settings-dev.json --port 3002
+  ```
 
-Then the app will be accessible at http://localhost:3002/ instead.
+  Then the app will be accessible at http://localhost:3002/ instead.
+</details>
