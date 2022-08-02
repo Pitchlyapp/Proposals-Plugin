@@ -32,7 +32,7 @@ FlowRouter.decodeQueryParamsOnce = true;
 
 const protectedRoutes = [
 	"home",
-  "plugin"
+	"plugin"
 ];
 
 const originalBlazeLayoutRenderFunc = BlazeLayout.render;
@@ -94,13 +94,13 @@ Tracker.autorun(() => {
 FlowRouter.wait();
 
 Tracker.autorun(() => {
-  if (Meteor.user()) {
+	if (Meteor.user()) {
 		// Sometimes, FlowRouter throws an extraneous error when it has been initialized
 		// multiple times. This try-catch just keeps it from polluting the JS console.
 		try {
-	    FlowRouter.initialize();
+			FlowRouter.initialize();
 		} catch (error) {}
-  }
+	}
 });
 
 
