@@ -189,8 +189,8 @@
 
 .__plugin .loading-container {
   text-align: center;
-	color: var(--pitchly-color-off-white-text);
-	animation: pitchly-fade-in .5s ease-out;
+  color: var(--pitchly-color-off-white-text);
+  animation: pitchly-fade-in .5s ease-out;
 }
 
 .__plugin .error-container {
