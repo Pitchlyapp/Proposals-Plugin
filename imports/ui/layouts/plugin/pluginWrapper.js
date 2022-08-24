@@ -25,6 +25,39 @@ Template.pluginWrapper.onCreated(function pluginWrapperOnCreated() {
   
   // Hold messages sent by Pitchly in here. This will be accessed by the plugin template to get Pitchly's UI state.
   this.messages = new ReactiveDict();
+  
+  // ===========================================================================
+  // ------------------------------- IMPORTANT!!! ------------------------------
+  // ===========================================================================
+  
+  // The below autorun will make sure that if the account the user is logged in
+  // with in the app DOES NOT match the account the user is logged into the
+  // platform with, the user will be logged out of this app and forced back
+  // through the OAuth flow, which should automatically log them in again, but
+  // as the same user they are logged into the platform as.
+  
+  // If this is not done, THIS WOULD BE A SECURITY RISK because the user currently
+  // logged into the app could be receiving messages about the UI state for another
+  // user in the platform, even potentially in another organization. Although
+  // raw data isn't typically exchanged via postMessages, things like filters,
+  // views, and IDs of things could be leaked and abused by another user.
+  
+  // ===========================================================================
+  
+  this.autorun(() => {
+    const currentUserId = Meteor.user()?.services?.pitchly?.id;
+    if (currentUserId) {
+      const currentPitchlyUserId = this.messages.get("person")?.personId;
+      if (currentPitchlyUserId) {
+        if (currentUserId!==currentPitchlyUserId) {
+          // This app is already configured to automatically log the user in
+          // when they're logged out, so calling Meteor.logout() will trigger
+          // them to be logged in again via the platform.
+          Meteor.logout();
+        }
+      }
+    }
+  });
 
 });
 
