@@ -315,11 +315,11 @@ Accounts.onLogout(() => {
 // Handle changing accounts
 
 Tracker.autorun((c) => {
-	Meteor.userId();
+  Meteor.userId();
   if (!c.firstRun) {
-  	Tracker.nonreactive(() => {
+    Tracker.nonreactive(() => {
       cleanupUserSession();
-  	});
+    });
   }
 });
 
